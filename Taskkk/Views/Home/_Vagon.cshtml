@@ -1,0 +1,118 @@
+﻿@model TblTransorders
+
+<br />
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">Mensubiyyet</label>
+    <select disabled="true" class="form-control  col-sm-9 mx-3 " asp-for="OrdVagonowner">
+        @foreach (var item in ViewBag.t)
+        {
+            @if (Model.OrdVagonowner == item.ScRefid)
+            {
+                <option selected>  @item.ScValue1</option>
+            }
+            else
+            {
+
+                <option value="@item.ScRefid" >@item.ScValue1</option>
+            }
+
+        }
+
+    </select>
+</div>
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">Vaqon tipi</label>
+    <select class="form-control  col-sm-9 mx-3 " asp-for="OrdVagontype">
+        @foreach (var item in ViewBag.f)
+        {
+            @if (Model.OrdVagontype == item.RtId)
+            {
+                <option selected>  @item.RtName</option>
+            }
+
+        }
+        @foreach (var item in ViewBag.f)
+        {
+            if (item.RtType == Model.OrdVagonowner)
+            {
+                <option value="@item.RtId">@item.RtName</option>
+             }
+        }
+    </select>
+</div>
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">Platforma Mensubiyyeti</label>
+    <select class="form-control  col-sm-9 mx-3 ">
+        @foreach (var item in ViewBag.f)
+        {
+            @if (Model.OrdPlatowner == item.RtId)
+            {
+                <option selected>  @item.RtName</option>
+            }
+
+        }
+        @foreach (var item in ViewBag.f)
+        {
+            if (item.RtType == Model.OrdPlatowner)
+            {
+                <option>@item.RtName</option>
+}
+        }
+    </select>
+</div>
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">Platforma tipi</label>
+    <select class="form-control  col-sm-9 mx-3 ">
+        @foreach (var item in ViewBag.f)
+        {
+            @if (Model.OrdPlattype == item.RtId)
+            {
+                <option selected>  @item.RtName</option>
+            }
+
+        }
+        @foreach (var item in ViewBag.f)
+        {
+            if (item.RtType == Model.OrdPlattype)
+            {
+                <option>@item.RtName</option>
+}
+        }
+    </select>
+</div>
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label  px-2">Bir vaqonun yuklenme cekisi</label>
+    <div class="col-sm-2">
+        <input type="text" readonly asp-for="OrdVagontonnaj" class="form-control">
+    </div>
+</div>
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label  px-2">umumi tonaj</label>
+    <div class="col-sm-2">
+        <input type="text" readonly asp-for="OrdVgalltonnaj" class="form-control">
+    </div>
+</div>
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label  px-2">Yuklu vaqon sayi</label>
+    <div class="col-sm-2">
+        <input type="text" readonly asp-for="OrdVagoncount" class="form-control">
+    </div>
+</div>
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label  px-2">Bosh</label>
+    <div class="col-sm-2">
+        <input type="text" readonly class="form-control">
+    </div>
+</div>
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label  px-2">Platforma</label>
+    <div class="col-sm-2">
+        <input type="text" readonly class="form-control">
+    </div>
+</div>

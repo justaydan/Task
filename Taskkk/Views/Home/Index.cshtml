@@ -1,0 +1,141 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Home Page";
+}
+    <div class="text-center">
+        <table class="table table-bordered newreqtable" id="reqtablenew">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Nts elave et</th>
+                    <th scope="col">Rejim</th>
+                    <th scope="col">Sobe</th>
+                    <th scope="col">Dasima tipi</th>
+                    <th scope="col">Musteri .K</th>
+                    <th scope="col">Dasinma erazisi</th>
+                    <th scope="col">Podkod</th>
+                    <th scope="col">Musteri</th>
+                    <th scope="col">Tarix</th>
+                    <th scope="col">Sifaris</th>
+                    <th scope="col">Nts</th>
+                    <th scope="col">Miqdar</th>
+                    <th scope="col">QNQ</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Mesafe</th>
+                    <th scope="col">Istifadeci</th>
+                    <th scope="col">Marshurt1</th>
+                    <th scope="col">Marshurt2</th>
+                    <th scope="col">Cemi Alish</th>
+                    <th scope="col">Cemi Satish</th>
+                    <th scope="col">Cemi gelir</th>
+                    <th scope="col">tonaj</th>
+                    <th scope="col">odeme</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.empl)
+                {
+                    <tr onclick="Redirect('https://localhost:44386/home/detail?id=@item.transorders.OrdRecno');">
+
+                        <td></td>
+
+                        @if (item.transorders.OrdBegpoint != null && item.transorders.OrdEndpoint != null)
+                        {
+                            <td>Tranzit</td>
+                        }
+                        else if (item.transorders.OrdBegpoint != null && item.transorders.OrdEndpoint == null)
+                        {
+                            <td>Idxal</td>
+                        }
+                        else if (item.transorders.OrdBegpoint == null && item.transorders.OrdEndpoint != null)
+                        {
+                            <td>Ixrac</td>
+                        }
+                        else
+                        {
+                            <td>Daxili</td>
+                        }
+
+                        <td></td>
+
+                        <td></td>
+
+
+                        <td></td>
+
+                        <td>@item.specodes.ScValue1</td>
+
+
+                        <td>@item.transorders.OrdPodcode</td>
+                        <td>@item.clcards.ClcAllname</td>
+                        <td>@item.transorders.OrdRdate</td>
+
+                        <td>@item.transorders.OrdFicheno</td>
+                        <td>@item.transorders.OrdNts</td>
+                        <td></td>
+                        <td>@item.transorders.OrdLoadstcardcode1</td>
+                        <td></td>
+                        <td>@item.transorders.OrdDistance</td>
+                        <td>@item.clcards.ClcAllname</td>
+
+                        @foreach (var item1 in Model.points)
+                        {
+                            @if (@item.transorders.OrdStartid == Convert.ToInt32(item1.PntRecno))
+                            {
+
+                                <td> @item1.PntCode  @item1.PntName1 </td>
+                                break;
+
+                            }
+
+                        }
+
+                        @foreach (var item1 in Model.points)
+                        {
+                            @if (@item.transorders.OrdEndid == Convert.ToInt32(item1.PntRecno))
+                            {
+
+                                <td>@item1.PntCode @item1.PntName1</td>
+                                break;
+
+                            }
+
+                        }
+
+                        <td>@item.transorders.OrdPtotal</td>
+                        <td>@item.transorders.OrdStotal</td>
+                        <td>@item.transorders.OrdProfit</td>
+                        <td>@item.transorders.OrdLoadamount</td>
+
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+
+
+       
+     
+
+    </div>
+
+
+
+<script type="text/javascript">
+    function Redirect(id) {
+        location.href = id;
+    }
+
+    $(document).ready(function () {
+        $('#reqtablenew tr').click(function () {
+            $('#reqtablenew tr').removeClass("active");
+            $(this).addClass("active");
+
+            $
+        });
+    });
+
+</script>
+
+

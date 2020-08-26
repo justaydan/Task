@@ -1,0 +1,243 @@
+﻿@model TblTransorders
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<h1>@Model</h1>
+<div>
+    <form asp-action="Save" asp-controller="Home" class="form-row">
+        <input type="hidden" name="id" value="@Model.OrdRecno" />
+
+
+        <div class="px-5">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label  px-2">Sifaris tipi</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control">
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label  px-2">Firma</label>
+                <select asp-for="OrdFirm" class="form-control  col-sm-9 mx-2 " asp-items="@(new SelectList(ViewBag.c,"FrmRecno","FrmName"))">
+                    <option selected> @Model.OrdFirmNavigation.FrmName</option>
+
+                </select>
+            </div>
+
+
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Ekspeditor</label>
+                <select asp-for="OrdClcrecno" class="form-control  col-sm-9 mx-2 " asp-items="@(new SelectList(ViewBag.b,"ClcRecno","ClcAllname"))">
+                    <option selected>@Model.OrdClcrecnoNavigation.ClcAllname</option>
+                </select>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label  ">Nomre</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="OrdFicheno" value="@Model.OrdFicheno">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Tarix</label>
+                <div class="col-sm-10">
+                    <input type="date" class="form-control">
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Firma kodu</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Qiymet</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Sobe</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Sifaris novu</label>
+                <select class="form-control col-sm-9 mx-2 " asp-items="@(new SelectList(ViewBag.a,"ScValue1"))">
+                    @if (Model.OrdBegpoint != null && Model.OrdEndpoint != null)
+                    {
+        <option>Tranzit</option> }
+                    else if (Model.OrdBegpoint != null && Model.OrdEndpoint == null)
+                    {
+        <option>Idxal</option> }
+                    else if (Model.OrdBegpoint == null && Model.OrdEndpoint != null)
+                    {
+        <option>Ixrac</option> }
+                    else
+                    {
+        <option>Daxili</option>}
+
+                </select>
+            </div>
+        </div>
+
+
+        <div class="px-5">
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label px-2">Podkod</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="OrdPodcode">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label  px-2">NTS</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="OrdNts">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label px-2">Telegram</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label px-2">Odenish novu</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label px-2">dashinma novu</label>
+                <select disabled="true" class="form-control  col-sm-9 mx-3 ">
+                    @if (Model.OrdVgntrntype == 1)
+                    {
+        <option selected> Vagon</option>
+                        <option> Konteynr</option> }
+                                    else
+                                    {
+                        <option selected> Konteynr </option>
+                                        <option> Vagon </option>}
+
+                </select>
+
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label px-2">mensheyi</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Dashima erazisi</label>
+                <select name="OrdPricearea" class="form-control  col-sm-9 mx-3 ">
+                    @foreach (var item in ViewBag.d)
+                    {
+        @if (Model.OrdPricearea == item.ScRefid)
+        {
+
+    <option selected>@item.ScValue1</option> }
+                    else
+                    {
+    <option value="@item.ScRefid">@item.ScValue1</option>}}
+
+                </select>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label ">Unvan deyishmek</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+
+        </div>
+        <div class="px-3">
+            <input type="submit" class="btn btn-info" value="Yadda Saxla" />
+            <button type="button" onclick="Redirect('https://localhost:5001/home/index');" class="btn btn-info">Geri</button>
+        </div>
+        <div id="view">
+            <partial name="_MainInfo" model="Model" />
+        </div>
+        <div id="view1" class="hidden">
+            <partial name="_Vagon" model="Model" />
+        </div>
+        <div id="view2" class="hidden">
+            <partial name="_Conteynr" model="Model" />
+        </div>
+    </form>
+</div>
+<div>
+    <button onclick="hey()" type="button" class="btn btn-info">Esas melumatlar</button>
+    <button onclick="bo()" id="info" type="button" class="btn btn-info"> </button>
+    <button type="button" class="btn btn-info">Dashinma tarifi</button>
+    <button type="button" class="btn btn-info">Vaqon ayrilmasi</button>
+    <button type="button" class="btn btn-info">Evvelki qiymetler</button>
+    <div>
+
+
+
+       
+
+    </div>
+</div>
+
+
+<script>
+    if (@Model.OrdVgntrntype == 1) {
+        document.getElementById("info").innerHTML = "Vagon"
+    }
+    else {
+        document.getElementById("info").innerHTML = "Konteynr"
+
+    }
+    var esasinfo = document.getElementById("view");
+    var info = document.getElementById("view1");
+    var info2 = document.getElementById("view2");
+    function hey() {
+
+        esasinfo.classList.remove("hidden");
+        info.classList.add("hidden");
+        info2.classList.add("hidden");
+    }
+    function bo() {
+        if (@Model.OrdVgntrntype == 1) {
+            esasinfo.classList.add("hidden");
+            info2.classList.add("hidden");
+            info.classList.remove("hidden");
+        }
+        else {
+             esasinfo.classList.add("hidden");
+             info.classList.add("hidden");
+            info2.classList.remove("hidden");
+        }
+    }
+    function Redirect(id) {
+        location.href = id;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+

@@ -1,0 +1,80 @@
+﻿@model TblTransorders
+<br />
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">Konteynr Mensubiyyet</label>
+    <select disabled="true" class="form-control  col-sm-9 mx-3 " asp-for="OrdVagonowner">
+        @foreach (var item in ViewBag.t)
+        {
+            @if (Model.OrdVagonowner == item.ScRefid)
+            {
+                <option selected>  @item.ScValue1</option>
+            }
+            else
+            {
+                <option value="@item.ScRefid">@item.ScValue1</option>
+            }
+        }
+
+    </select>
+</div>
+
+
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">Konteynr tipi</label>
+    <select class="form-control  col-sm-9 mx-3 " asp-for="OrdContaintype">
+        @foreach (var item in ViewBag.f)
+        {
+            @if (Model.OrdContaintype == item.RtId)
+            {
+                <option value="@item.RtId">  @item.RtName</option>
+            }
+
+        }
+
+    </select>
+</div>
+
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">Platforma Mensubiyyet</label>
+    <select disabled="true" class="form-control  col-sm-9 mx-3 " asp-for="OrdPlatowner">
+        @foreach (var item in ViewBag.t)
+        {
+            @if (Model.OrdPlatowner == item.ScRefid)
+            {
+                <option selected>  @item.ScValue1</option>
+            }
+
+            else
+            {
+                <option value="@item.ScRefid">  @item.ScValue1</option>
+            }
+        }
+    </select>
+</div>
+
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">Platforma tipi</label>
+    <select class="form-control  col-sm-9 mx-3 " asp-for="OrdPlattype">
+        @foreach (var item in ViewBag.f)
+        {
+            @if (Model.OrdPlattype == item.RtId)
+            {
+                <option selected>  @item.RtName</option>
+            }
+
+        }
+        @foreach (var item in ViewBag.f)
+        {
+            if (item.RtType == Model.OrdVagonowner)
+            {
+                <option value="@item.RtType">@item.RtName</option>
+            }
+        }
+    </select>
+</div>
+
+
